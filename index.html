@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>El Sobrino | Chicharronería · Barranco</title>
+<meta name="description" content="Chicharronería El Sobrino en Barranco. Pide con hambre: chicharrón, pan con chicharrón, porciones y bebidas por WhatsApp.">
+<style>
+  :root{
+    --crema:#FBEBD3;
+    --choco:#2E1B12;
+    --choco-2:#3D2416;
+    --terracota:#D9903F;
+    --rojo:#A52A2A;
+    --texto-claro:#F6ECDD;
+    --texto-oscuro:#2E1B12;
+    --cafe:#6B4A32;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--crema);
+    color:var(--texto-oscuro);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,.serif{
+    font-family:Georgia,"Times New Roman",ui-serif,serif;
+    margin:0;
+  }
+  .acento{font-style:italic;color:var(--terracota);}
+  .eyebrow{
+    text-transform:uppercase;
+    letter-spacing:2px;
+    font-size:12px;
+    font-weight:700;
+    color:var(--terracota);
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .eyebrow::before{content:"";width:18px;height:2px;background:var(--terracota);display:inline-block;}
+  a{color:inherit;}
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:13px 22px;
+    border-radius:30px;
+    font-weight:700;
+    font-size:14px;
+    text-decoration:none;
+    border:1.5px solid transparent;
+    cursor:pointer;
+  }
+  .btn-primario{background:var(--terracota);color:var(--choco);}
+  .btn-secundario{background:transparent;color:var(--texto-claro);border-color:rgba(246,236,221,0.4);}
+  .btn-secundario.oscuro{color:var(--texto-oscuro);border-color:rgba(46,27,18,0.3);}
+
+  /* -------- header -------- */
+  header{
+    background:var(--choco);
+    color:var(--texto-claro);
+    padding:18px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    position:sticky;
+    top:0;
+    z-index:100;
+  }
+  .marca{display:flex;align-items:center;gap:10px;}
+  .marca .logo{
+    width:40px;height:40px;border-radius:50%;
+    object-fit:cover;flex:0 0 auto;
+    border:1.5px solid rgba(217,144,63,0.5);
+  }
+  .marca .nombre{line-height:1.05;}
+  .marca .nombre .chico{
+    display:block;font-size:9.5px;letter-spacing:2px;
+    text-transform:uppercase;color:var(--terracota);font-weight:700;
+  }
+  .marca .nombre .grande{
+    font-family:Georgia,serif;
+    font-size:19px;
+  }
+  nav.links{display:flex;align-items:center;gap:18px;font-size:14px;}
+  nav.links a{text-decoration:none;opacity:0.9;display:none;}
+  @media (min-width:640px){ nav.links a.desktop{display:inline;} }
+
+  /* -------- hero -------- */
+  .hero{
+    background:radial-gradient(circle at 85% 15%, rgba(217,144,63,0.18), transparent 55%), var(--choco);
+    color:var(--texto-claro);
+    padding:44px 20px 40px;
+  }
+  .hero-grid{
+    max-width:1000px;margin:0 auto;
+    display:flex;flex-direction:column;gap:22px;
+  }
+  @media (min-width:760px){
+    .hero-grid{flex-direction:row;align-items:center;justify-content:space-between;gap:36px;}
+    .hero-texto{flex:1 1 50%;}
+    .hero-foto-wrap{flex:1 1 42%;}
+  }
+  .hero-foto{
+    width:100%;max-width:380px;display:block;margin:0 auto;
+    border-radius:20px;object-fit:cover;
+    box-shadow:0 12px 30px rgba(0,0,0,0.35);
+    aspect-ratio:4/3;
+  }
+  .hero h1{font-size:clamp(36px,10vw,52px);line-height:1.05;font-weight:400;}
+  .hero p{font-size:15px;line-height:1.55;color:rgba(246,236,221,0.85);max-width:46ch;}
+  .hero-botones{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px;}
+
+  /* -------- franja info -------- */
+  .franja{
+    background:var(--choco-2);
+    color:var(--texto-claro);
+    padding:16px 20px;
+    display:flex;flex-wrap:wrap;gap:16px 28px;
+    font-size:13px;
+    max-width:920px;margin:0 auto;
+    border-top:1px solid rgba(246,236,221,0.12);
+  }
+  .franja .item{display:flex;align-items:flex-start;gap:8px;}
+  .franja .item b{display:block;font-size:13px;}
+  .franja .item span{opacity:0.75;font-size:12.5px;}
+
+  /* -------- historia -------- */
+  .historia{
+    padding:52px 20px;
+    max-width:920px;margin:0 auto;
+    display:grid;gap:22px;
+  }
+  .historia h2{font-size:clamp(26px,6vw,34px);line-height:1.15;margin:10px 0 16px;font-weight:400;}
+  .historia p{font-size:14.5px;line-height:1.6;color:var(--cafe);margin:0 0 10px;}
+  .historia .destacado{font-weight:700;color:var(--texto-oscuro);font-style:normal;}
+
+  /* -------- carta -------- */
+  .carta{
+    background:var(--crema);
+    padding:48px 20px 20px;
+    max-width:920px;margin:0 auto;
+  }
+  .carta-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;margin-bottom:22px;}
+  .carta-top h2{font-size:clamp(26px,6vw,32px);font-weight:400;margin-top:8px;}
+  .carta-top p{max-width:36ch;font-size:13.5px;color:var(--cafe);margin:8px 0 0;}
+
+  .tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .tabs::-webkit-scrollbar{display:none;}
+  .tab{
+    flex:0 0 auto;
+    background:#fff;
+    border:1.5px solid rgba(46,27,18,0.12);
+    color:var(--cafe);
+    padding:9px 16px;
+    border-radius:24px;
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .tab.activo{background:var(--rojo);border-color:var(--rojo);color:#fff;}
+
+  .panel{display:none;padding-top:20px;}
+  .panel.activo{display:grid;gap:14px;}
+
+  .producto{
+    background:#fff;
+    border-radius:16px;
+    padding:16px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:14px;
+    box-shadow:0 2px 10px rgba(46,27,18,0.06);
+  }
+  .producto .tag{
+    display:inline-block;
+    font-size:10px;font-weight:800;letter-spacing:0.5px;
+    text-transform:uppercase;color:var(--terracota);
+    background:rgba(217,144,63,0.12);
+    padding:3px 8px;border-radius:8px;margin-bottom:6px;
+  }
+  .producto h3{font-family:Georgia,serif;font-size:18px;font-weight:400;margin:0 0 4px;}
+  .producto p{margin:0;font-size:12.5px;color:var(--cafe);line-height:1.4;max-width:32ch;}
+  .producto .precio{
+    flex:0 0 auto;text-align:right;
+  }
+  .producto .precio .monto{
+    display:block;font-weight:800;color:var(--rojo);font-size:16px;margin-bottom:8px;
+  }
+
+  .subtitulo{
+    font-size:11px;font-weight:800;letter-spacing:0.8px;text-transform:uppercase;
+    color:var(--terracota);background:rgba(217,144,63,0.12);
+    display:inline-block;padding:5px 12px;border-radius:8px;
+    margin:18px 0 8px;
+  }
+  .subtitulo:first-child{margin-top:2px;}
+  .lista{background:#fff;border-radius:16px;padding:6px 16px;box-shadow:0 2px 10px rgba(46,27,18,0.06);}
+  .fila{
+    display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+    padding:9px 0;font-size:14px;
+    border-bottom:1px solid rgba(46,27,18,0.06);
+  }
+  .fila:last-child{border-bottom:none;}
+  .fila span.nombre{white-space:normal;}
+  .fila i{flex:1;border-bottom:1px dotted rgba(46,27,18,0.35);height:0;margin-bottom:4px;min-width:12px;}
+  .fila b{white-space:nowrap;color:var(--rojo);font-weight:800;font-size:13.5px;}
+  .carta-cta{text-align:center;margin:26px 0 6px;}
+
+  /* -------- pedido (mesa, pago, voucher) -------- */
+  .pedido{
+    background:#fff;
+    padding:48px 20px 44px;
+    max-width:920px;margin:0 auto;
+    border-top:1px dashed rgba(46,27,18,0.15);
+    border-bottom:1px dashed rgba(46,27,18,0.15);
+  }
+  .pedido h2{font-size:clamp(24px,6vw,28px);font-weight:400;margin:8px 0 4px;}
+  .pedido > p.desc{font-size:13.5px;color:var(--cafe);margin:0 0 24px;max-width:50ch;}
+
+  .paso{
+    background:var(--crema);
+    border-radius:16px;
+    padding:18px;
+    margin-bottom:16px;
+  }
+  .paso .paso-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:24px;height:24px;border-radius:50%;
+    background:var(--rojo);color:#fff;font-size:12px;font-weight:800;
+    margin-right:8px;
+  }
+  .paso h3{display:inline;font-family:Georgia,serif;font-size:16px;font-weight:400;vertical-align:middle;}
+  .paso .paso-cuerpo{margin-top:12px;}
+
+  #resumenPedido{display:grid;gap:6px;font-size:13.5px;}
+  #resumenPedido .linea{display:flex;justify-content:space-between;gap:10px;}
+  #resumenPedido .linea b{color:var(--rojo);}
+  #resumenPedido .total-linea{
+    display:flex;justify-content:space-between;font-weight:800;
+    border-top:1px solid rgba(46,27,18,0.15);margin-top:8px;padding-top:8px;font-size:15px;
+  }
+  #resumenVacio{font-size:13px;color:var(--cafe);font-style:italic;}
+
+  select.mesa-select{
+    width:100%;max-width:260px;
+    padding:12px 14px;border-radius:12px;
+    border:1.5px solid rgba(46,27,18,0.2);
+    background:#fff;color:var(--texto-oscuro);
+    font-size:14px;font-weight:600;
+  }
+
+  .qr-box{
+    display:flex;flex-wrap:wrap;gap:16px;align-items:center;
+  }
+  .qr-box img{
+    width:130px;height:130px;object-fit:contain;
+    background:#fff;border-radius:12px;border:1.5px dashed rgba(46,27,18,0.25);
+    padding:6px;
+  }
+  .qr-box .monto-a-pagar{font-size:14px;}
+  .qr-box .monto-a-pagar b{display:block;font-size:22px;color:var(--rojo);}
+
+  .voucher-input{display:flex;flex-direction:column;gap:10px;align-items:flex-start;}
+  .voucher-input input[type="file"]{font-size:12.5px;}
+  #vistaVoucher{
+    max-width:160px;border-radius:12px;display:none;
+    border:1.5px solid rgba(46,27,18,0.15);
+  }
+  .aviso{
+    font-size:12px;color:var(--cafe);background:rgba(217,144,63,0.12);
+    padding:10px 12px;border-radius:10px;margin-top:6px;
+  }
+
+  #btnRealizarPedido{width:100%;justify-content:center;font-size:15px;padding:15px;}
+
+  .stepper{display:flex;align-items:center;gap:8px;margin-left:6px;}
+  .stepper button{
+    width:26px;height:26px;border-radius:50%;
+    border:1.5px solid var(--terracota);background:#fff;
+    color:var(--texto-oscuro);font-weight:800;font-size:15px;
+    line-height:1;cursor:pointer;flex:0 0 auto;
+  }
+  .stepper button.mas{background:var(--terracota);color:var(--choco);}
+  .stepper .cant{min-width:14px;text-align:center;font-weight:800;font-size:13px;}
+
+  /* -------- visítanos -------- */
+  .visitanos{
+    background:var(--choco);
+    color:var(--texto-claro);
+    padding:48px 20px 40px;
+  }
+  .visitanos-in{max-width:920px;margin:0 auto;display:grid;gap:16px;}
+  .visitanos h2{font-size:clamp(24px,6vw,30px);font-weight:400;margin:10px 0 6px;}
+  .visitanos p{color:rgba(246,236,221,0.75);font-size:14px;max-width:44ch;margin:0 0 10px;}
+  .visitanos-datos{display:flex;flex-wrap:wrap;gap:14px 26px;font-size:13.5px;margin-bottom:6px;}
+  .visitanos-datos b{display:block;}
+  .visitanos-datos span{opacity:0.75;}
+
+  footer{
+    text-align:center;
+    padding:70px 16px 100px;
+    font-size:12px;
+    color:var(--cafe);
+  }
+
+  .flotante{
+    position:fixed;left:16px;right:16px;bottom:16px;max-width:420px;margin:0 auto;
+    background:var(--choco);color:#fff;
+    padding:12px 12px 12px 20px;border-radius:18px;
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    box-shadow:0 8px 26px rgba(0,0,0,0.35);z-index:60;
+  }
+  .flotante .info{font-size:13px;font-weight:700;color:var(--texto-claro);}
+  .flotante .info small{display:block;font-weight:400;opacity:0.7;font-size:11px;}
+  .flotante button{
+    background:#1F9D55;color:#fff;border:none;
+    padding:11px 18px;border-radius:24px;
+    font-weight:800;font-size:13.5px;cursor:pointer;white-space:nowrap;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="marca">
+    <img class="logo" src="logo.webp" alt="Logo Chicharronería El Sobrino" width="40" height="40" loading="eager">
+    <div class="nombre">
+      <span class="chico">Chicharronería</span>
+      <span class="grande">El Sobrino</span>
+    </div>
+  </div>
+  <nav class="links">
+    <a href="#carta" class="desktop">La carta</a>
+    <a href="#pedido" class="desktop">Tu pedido</a>
+    <a href="#visitanos" class="desktop">Visítanos</a>
+    <a class="btn btn-primario" style="padding:9px 16px;font-size:13px;" href="https://wa.me/51935129642?text=Hola%2C%20quiero%20hacer%20un%20pedido%20%F0%9F%98%8B" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-texto">
+      <p class="eyebrow">Sabor de barrio</p>
+      <h1>El pan que <span class="acento">te abraza.</span></h1>
+      <p>Chicharrón generoso, pan calientito y la sazón casera que empieza a conquistar Barranco.</p>
+      <div class="hero-botones">
+        <a class="btn btn-primario" href="#carta">Ver la carta ↘</a>
+        <a class="btn btn-secundario" href="https://wa.me/51935129642?text=Hola%2C%20quiero%20hacer%20un%20pedido%20%F0%9F%98%8B" target="_blank" rel="noopener">Hacer pedido ↗</a>
+      </div>
+    </div>
+    <div class="hero-foto-wrap">
+      <img class="hero-foto" src="pan-chicharron.webp" alt="Pan con chicharrón de El Sobrino" width="640" height="480" loading="eager">
+    </div>
+  </div>
+  <div class="franja">
+    <div class="item">🕐 <span><b>Lun — Dom</b><span>6:00 am – 12:00 pm / 2:00 pm – 10:00 pm</span></span></div>
+    <div class="item">📍 <span><b>Jr. Pazos 237</b><span>Barranco, Lima</span></span></div>
+    <div class="item">✨ <span><b>Tradición desde el barrio</b></span></div>
+  </div>
+</section>
+
+<section class="historia">
+  <p class="eyebrow">La historia en cada mordisco</p>
+  <h2>Barranco sabe dónde <span class="acento">volver.</span></h2>
+  <p>El Sobrino nació para servir como se sirve en casa: sin medir la generosidad. Un buen pan, una buena conversación y ese primer crujido que dice que elegiste bien.</p>
+  <p class="destacado">Pasa, pide el tuyo y quédate un rato.</p>
+</section>
+
+<section class="carta" id="carta">
+  <div class="carta-top">
+    <div>
+      <p class="eyebrow">La carta</p>
+      <h2>Pide con <span class="acento">hambre.</span></h2>
+    </div>
+    <p>Todo sale caliente. Elige tu antojo, suma al pedido y mándanoslo por WhatsApp.</p>
+  </div>
+
+  <div class="tabs">
+    <button class="tab activo" data-tab="favoritos">Los favoritos</button>
+    <button class="tab" data-tab="panes">Panes</button>
+    <button class="tab" data-tab="porciones">Porciones</button>
+    <button class="tab" data-tab="jugos">Jugos</button>
+    <button class="tab" data-tab="bebidas">Bebidas</button>
+  </div>
+
+  <div class="panel activo" id="favoritos">
+    <div class="producto" data-name="Pan con chicharrón" data-price="8">
+      <div>
+        <span class="tag">El de siempre</span>
+        <h3>Pan con chicharrón</h3>
+        <p>Chicharrón tronado, prensado en pan calientito.</p>
+      </div>
+      <div class="precio">
+        <span class="monto">S/ 8</span>
+        <div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div>
+      </div>
+    </div>
+    <div class="producto" data-name="1 kilo de chicharrón" data-price="70">
+      <div>
+        <span class="tag">Para compartir</span>
+        <h3>1 kilo de chicharrón</h3>
+        <p>Prensado al momento, ideal para llevar a casa.</p>
+      </div>
+      <div class="precio">
+        <span class="monto">S/ 70</span>
+        <div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div>
+      </div>
+    </div>
+    <div class="producto" data-name="Jugo Especial" data-price="10">
+      <div>
+        <span class="tag">Jugo especial</span>
+        <h3>Jugo Especial</h3>
+        <p>Nuestra mezcla de frutas de la casa, bien fría.</p>
+      </div>
+      <div class="precio">
+        <span class="monto">S/ 10</span>
+        <div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" id="panes">
+    <p class="subtitulo">Panes</p>
+    <div class="lista">
+      <div class="fila" data-name="Pan con chicharrón" data-price="8"><span class="nombre">Pan con chicharrón</span><i></i><b>S/ 8</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Pan con chorizo" data-price="3"><span class="nombre">Pan con chorizo</span><i></i><b>S/ 3</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Pan con relleno" data-price="4"><span class="nombre">Pan con relleno</span><i></i><b>S/ 4</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Pan con queso fresco" data-price="3"><span class="nombre">Pan con queso fresco (suizo o mantecoso)</span><i></i><b>S/ 3</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Pan con hot dog" data-price="3.50"><span class="nombre">Pan con hot dog</span><i></i><b>S/ 3.50</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Pan con huevo" data-price="2.50"><span class="nombre">Pan con huevo</span><i></i><b>S/ 2.50</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila"><span class="nombre">Pan con palta</span><i></i><b>Consultar</b></div>
+    </div>
+  </div>
+
+  <div class="panel" id="porciones">
+    <p class="subtitulo">Porciones y adicionales</p>
+    <div class="lista">
+      <div class="fila" data-name="Porción de camote" data-price="5"><span class="nombre">Porción de camote</span><i></i><b>S/ 5</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Porción de costillas" data-price="33"><span class="nombre">Porción de costillas</span><i></i><b>S/ 33</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Porción de chicharrón" data-price="25"><span class="nombre">Porción de chicharrón</span><i></i><b>S/ 25</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="¼ de chicharrón" data-price="17"><span class="nombre">¼ de chicharrón</span><i></i><b>S/ 17</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="½ de chicharrón" data-price="35"><span class="nombre">½ de chicharrón</span><i></i><b>S/ 35</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="¾ de chicharrón" data-price="50"><span class="nombre">¾ de chicharrón</span><i></i><b>S/ 50</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="1 kilo de chicharrón" data-price="70"><span class="nombre">1 kilo de chicharrón</span><i></i><b>S/ 70</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+    </div>
+  </div>
+
+  <div class="panel" id="jugos">
+    <p class="subtitulo">Jugos de fruta</p>
+    <div class="lista">
+      <div class="fila" data-name="Jugo de papaya" data-price="8"><span class="nombre">Papaya</span><i></i><b>S/ 8</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Jugo de mango" data-price="8"><span class="nombre">Mango</span><i></i><b>S/ 8</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Jugo de piña" data-price="8"><span class="nombre">Piña</span><i></i><b>S/ 8</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Jugo de fresa" data-price="8"><span class="nombre">Fresa</span><i></i><b>S/ 8</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Jugo surtido" data-price="9"><span class="nombre">Surtido</span><i></i><b>S/ 9</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Jugo Especial" data-price="10"><span class="nombre">Especial</span><i></i><b>S/ 10</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+    </div>
+    <p class="subtitulo">Con leche</p>
+    <div class="lista">
+      <div class="fila" data-name="Jugo de papaya con leche" data-price="9.50"><span class="nombre">Papaya con leche</span><i></i><b>S/ 9.50</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Jugo de fresa con leche" data-price="9.50"><span class="nombre">Fresa con leche</span><i></i><b>S/ 9.50</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Jugo de plátano con leche" data-price="9.50"><span class="nombre">Plátano con leche</span><i></i><b>S/ 9.50</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Jugo de lúcuma con leche" data-price="9.50"><span class="nombre">Lúcuma con leche</span><i></i><b>S/ 9.50</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+    </div>
+  </div>
+
+  <div class="panel" id="bebidas">
+    <p class="subtitulo">Bebidas calientes</p>
+    <div class="lista">
+      <div class="fila" data-name="Café" data-price="5"><span class="nombre">Café</span><i></i><b>S/ 5</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Café c/leche" data-price="5.50"><span class="nombre">Café c/leche</span><i></i><b>S/ 5.50</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Leche con Milo" data-price="5"><span class="nombre">Leche con Milo</span><i></i><b>S/ 5</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Chocolate" data-price="5"><span class="nombre">Chocolate</span><i></i><b>S/ 5</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Té" data-price="3"><span class="nombre">Té</span><i></i><b>S/ 3</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Anís" data-price="3"><span class="nombre">Anís</span><i></i><b>S/ 3</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Manzanilla" data-price="3"><span class="nombre">Manzanilla</span><i></i><b>S/ 3</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+    </div>
+    <p class="subtitulo">Bebidas tradicionales</p>
+    <div class="lista">
+      <div class="fila" data-name="Emoliente" data-price="3"><span class="nombre">Emoliente</span><i></i><b>S/ 3</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Quinua" data-price="3"><span class="nombre">Quinua</span><i></i><b>S/ 3</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Maca" data-price="3"><span class="nombre">Maca</span><i></i><b>S/ 3</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Ponche de habas" data-price="3"><span class="nombre">Ponche de habas</span><i></i><b>S/ 3</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Avena" data-price="3"><span class="nombre">Avena</span><i></i><b>S/ 3</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Bebida tradicional Especial" data-price="5"><span class="nombre">Especial</span><i></i><b>S/ 5</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+    </div>
+    <p class="subtitulo">Tradicionales con leche</p>
+    <div class="lista">
+      <div class="fila" data-name="Quinua con leche" data-price="4"><span class="nombre">Quinua con leche</span><i></i><b>S/ 4</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Maca con leche" data-price="4"><span class="nombre">Maca con leche</span><i></i><b>S/ 4</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Ponche de habas con leche" data-price="4"><span class="nombre">Ponche de habas con leche</span><i></i><b>S/ 4</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Avena con leche" data-price="4"><span class="nombre">Avena con leche</span><i></i><b>S/ 4</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+    </div>
+    <p class="subtitulo">Bebidas frías</p>
+    <div class="lista">
+      <div class="fila" data-name="Jarra de chicha morada" data-price="10"><span class="nombre">Jarra de chicha morada</span><i></i><b>S/ 10</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Jarra de limonada" data-price="15"><span class="nombre">Jarra de limonada</span><i></i><b>S/ 15</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Jarra de maracuyá" data-price="12"><span class="nombre">Jarra de maracuyá</span><i></i><b>S/ 12</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="CocaCola / Inkacola 1/2 Lt" data-price="5"><span class="nombre">CocaCola / Inkacola 1/2 Lt</span><i></i><b>S/ 5</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="CocaCola / Inkacola 1 Lt" data-price="8"><span class="nombre">CocaCola / Inkacola 1 Lt</span><i></i><b>S/ 8</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="CocaCola / Inkacola 1.5 Lt" data-price="10"><span class="nombre">CocaCola / Inkacola 1.5 Lt</span><i></i><b>S/ 10</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+      <div class="fila" data-name="Agua mineral" data-price="3"><span class="nombre">Agua mineral</span><i></i><b>S/ 3</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
+    </div>
+  </div>
+
+  <div class="carta-cta">
+    <p style="font-size:12.5px;color:var(--cafe);">Usa los botones ➕ para armar tu pedido — pasa a "Tu pedido" para elegir tu mesa y pagar.</p>
+  </div>
+</section>
+
+<section class="pedido" id="pedido">
+  <p class="eyebrow">Tu pedido</p>
+  <h2>Ya casi, <span class="acento">falta poco.</span></h2>
+  <p class="desc">Sigue estos pasos y tu pedido llega directo al restaurante.</p>
+
+  <div class="paso">
+    <span class="paso-num">1</span><h3>Revisa tu pedido</h3>
+    <div class="paso-cuerpo">
+      <div id="resumenPedido">
+        <p id="resumenVacio">Todavía no agregaste productos. Sube a la carta y dale ➕ a lo que quieras pedir.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="paso">
+    <span class="paso-num">2</span><h3>Elige tu mesa</h3>
+    <div class="paso-cuerpo">
+      <select class="mesa-select" id="mesaSelect">
+        <option value="">Selecciona tu mesa…</option>
+        <option>Mesa 1</option>
+        <option>Mesa 2</option>
+        <option>Mesa 3</option>
+        <option>Mesa 4</option>
+        <option>Para llevar</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="paso">
+    <span class="paso-num">3</span><h3>Paga con Yape o Plin</h3>
+    <div class="paso-cuerpo qr-box">
+      <img src="qr-pago.png" alt="Código QR de Yape/Plin para pagar" onerror="this.style.display='none'; document.getElementById('qrFaltante').style.display='block';">
+      <p id="qrFaltante" style="display:none;font-size:12px;color:var(--cafe);max-width:26ch;">(Aquí falta subir el QR real de Yape/Plin — avísame y lo agrego)</p>
+      <div class="monto-a-pagar">
+        Monto exacto a pagar:
+        <b id="montoAPagar">S/ 0.00</b>
+      </div>
+    </div>
+  </div>
+
+  <div class="paso">
+    <span class="paso-num">4</span><h3>Sube tu voucher (opcional)</h3>
+    <div class="paso-cuerpo voucher-input">
+      <input type="file" id="voucherInput" accept="image/*" capture="environment">
+      <img id="vistaVoucher" alt="Vista previa del voucher">
+    </div>
+  </div>
+
+  <button class="btn btn-primario" id="btnRealizarPedido">Realizar pedido ↗</button>
+  <p class="aviso">📌 Si ya pagaste, puedes subir tu voucher aquí (no es obligatorio). Al tocar "Realizar pedido" se abre WhatsApp con tu mesa, tu pedido y el total ya escritos; si subiste el voucher, solo falta un toque extra para adjuntarlo ahí mismo, ya que por seguridad WhatsApp no permite que una página lo adjunte sola.</p>
+</section>
+
+<section class="visitanos" id="visitanos">
+  <div class="visitanos-in">
+    <p class="eyebrow">Ven a vernos</p>
+    <h2>Estamos en el <span class="acento">corazón de Barranco.</span></h2>
+    <div class="visitanos-datos">
+      <div>📍 <b>Jr. Pazos 237</b><span>Barranco, Lima</span></div>
+      <div>🕐 <b>Lunes a domingo</b><span>6:00 am – 12:00 pm y 2:00 pm – 10:00 pm</span></div>
+    </div>
+    <a class="btn btn-primario" href="https://www.google.com/maps/search/?api=1&query=Jr.+Pazos+237+Barranco+Lima" target="_blank" rel="noopener">Cómo llegar ↗</a>
+  </div>
+</section>
+
+<footer>Chicharronería El Sobrino · Barranco, Lima</footer>
+
+<div class="flotante">
+  <div class="info" id="carritoInfo">¿Ya elegiste?<small>Usa los botones ➕ de la carta</small></div>
+  <button id="btnEnviarPedido">Pedir por WhatsApp</button>
+</div>
+
+<script>
+  var NUMERO_WHATSAPP = "51935129642";
+  var cart = {};
+
+  function renderResumen(){
+    var cont = document.getElementById('resumenPedido');
+    var vacio = document.getElementById('resumenVacio');
+    var keys = Object.keys(cart);
+    var monto = document.getElementById('montoAPagar');
+    if (keys.length === 0){
+      cont.innerHTML = '<p id="resumenVacio">Todavía no agregaste productos. Sube a la carta y dale ➕ a lo que quieras pedir.</p>';
+      if (monto) monto.textContent = 'S/ 0.00';
+      return;
+    }
+    var html = '';
+    var total = 0;
+    keys.forEach(function(k){
+      var sub = cart[k].qty * cart[k].precio;
+      total += sub;
+      html += '<div class="linea"><span>' + cart[k].qty + ' × ' + k + '</span><b>S/ ' + sub.toFixed(2).replace(/\.00$/,'') + '</b></div>';
+    });
+    html += '<div class="total-linea"><span>Total</span><span>S/ ' + total.toFixed(2).replace(/\.00$/,'') + '</span></div>';
+    cont.innerHTML = html;
+    if (monto) monto.textContent = 'S/ ' + total.toFixed(2).replace(/\.00$/,'');
+  }
+
+  function actualizarBarra(){
+    var count = 0, total = 0;
+    for (var k in cart){ count += cart[k].qty; total += cart[k].qty * cart[k].precio; }
+    var info = document.getElementById('carritoInfo');
+    var btn = document.getElementById('btnEnviarPedido');
+    if (count > 0){
+      info.innerHTML = count + (count===1 ? ' ítem' : ' ítems') + '<small>Total: S/ ' + total.toFixed(2).replace(/\.00$/,'') + '</small>';
+      btn.textContent = 'Ver pedido';
+    } else {
+      info.innerHTML = '¿Ya elegiste?<small>Usa los botones ➕ de la carta</small>';
+      btn.textContent = 'Pedir por WhatsApp';
+    }
+    renderResumen();
+  }
+
+  document.querySelectorAll('[data-name]').forEach(function(item){
+    var nombre = item.dataset.name;
+    var precio = parseFloat(item.dataset.price);
+    var qtySpan = item.querySelector('.cant');
+    var qty = 0;
+    var masBtn = item.querySelector('.mas');
+    var menosBtn = item.querySelector('.menos');
+    if (masBtn){
+      masBtn.addEventListener('click', function(){
+        qty++;
+        qtySpan.textContent = qty;
+        cart[nombre] = { precio: precio, qty: qty };
+        actualizarBarra();
+      });
+    }
+    if (menosBtn){
+      menosBtn.addEventListener('click', function(){
+        qty = Math.max(0, qty - 1);
+        qtySpan.textContent = qty;
+        if (qty === 0){ delete cart[nombre]; } else { cart[nombre] = { precio: precio, qty: qty }; }
+        actualizarBarra();
+      });
+    }
+  });
+
+  document.getElementById('btnEnviarPedido').addEventListener('click', function(){
+    var keys = Object.keys(cart);
+    if (keys.length === 0){
+      var texto = 'Hola, quiero hacer un pedido 😋';
+      window.open('https://wa.me/' + NUMERO_WHATSAPP + '?text=' + encodeURIComponent(texto), '_blank');
+    } else {
+      document.getElementById('pedido').scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+
+  var voucherInput = document.getElementById('voucherInput');
+  var vistaVoucher = document.getElementById('vistaVoucher');
+  var voucherListo = false;
+  voucherInput.addEventListener('change', function(){
+    if (voucherInput.files && voucherInput.files[0]){
+      voucherListo = true;
+      var reader = new FileReader();
+      reader.onload = function(e){
+        vistaVoucher.src = e.target.result;
+        vistaVoucher.style.display = 'block';
+      };
+      reader.readAsDataURL(voucherInput.files[0]);
+    } else {
+      voucherListo = false;
+      vistaVoucher.style.display = 'none';
+    }
+  });
+
+  document.getElementById('btnRealizarPedido').addEventListener('click', function(){
+    var keys = Object.keys(cart);
+    if (keys.length === 0){
+      alert('Primero agrega productos a tu pedido desde la carta.');
+      document.getElementById('carta').scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+    var mesa = document.getElementById('mesaSelect').value;
+    if (!mesa){
+      alert('Por favor selecciona tu mesa antes de continuar.');
+      return;
+    }
+    if (!voucherListo){
+      // El voucher es opcional: seguimos sin preguntar ni bloquear.
+    }
+    var lineas = [];
+    var total = 0;
+    keys.forEach(function(k){
+      lineas.push(cart[k].qty + ' ' + k + ' - S/ ' + (cart[k].qty * cart[k].precio).toFixed(2).replace(/\.00$/,''));
+      total += cart[k].qty * cart[k].precio;
+    });
+    var texto = 'Hola, quiero hacer un pedido 🧾\n' +
+      'Mesa: ' + mesa + '\n\n' +
+      lineas.join('\n') + '\n\n' +
+      'Total: S/ ' + total.toFixed(2).replace(/\.00$/,'') + '\n\n' +
+      (voucherListo ? 'Ya pagué, les adjunto la foto del voucher aquí mismo 👇' : 'Pagaré/confirmaré el voucher directamente por este chat.');
+    window.open('https://wa.me/' + NUMERO_WHATSAPP + '?text=' + encodeURIComponent(texto), '_blank');
+  });
+
+  document.querySelectorAll('.tab').forEach(function(tab){
+    tab.addEventListener('click', function(){
+      document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('activo');});
+      document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('activo');});
+      tab.classList.add('activo');
+      document.getElementById(tab.dataset.tab).classList.add('activo');
+    });
+  });
+</script>
+
+</body>
+</html>

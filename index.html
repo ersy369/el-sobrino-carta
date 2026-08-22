@@ -194,6 +194,17 @@
     display:block;font-weight:800;color:var(--rojo);font-size:16px;margin-bottom:8px;
   }
 
+  .stock{
+    display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:0.4px;
+    text-transform:uppercase;padding:2px 8px;border-radius:8px;
+  }
+  .stock-si{background:rgba(60,150,80,0.15);color:#2E7D32;}
+  .stock-no{background:rgba(165,42,42,0.14);color:var(--rojo);}
+  .producto .precio .stock{display:inline-block;margin-bottom:8px;}
+  .fila .stock{margin-left:2px;}
+  .producto.agotado,.fila.agotado{opacity:0.5;}
+  .cargando-menu{padding:20px 4px;font-size:13px;color:var(--cafe);text-align:center;}
+
   .subtitulo{
     font-size:11px;font-weight:800;letter-spacing:0.8px;text-transform:uppercase;
     color:var(--terracota);background:rgba(217,144,63,0.12);
@@ -349,7 +360,7 @@
     <div class="hero-texto">
       <p class="eyebrow">Sabor de barrio</p>
       <h1>El pan que <span class="acento">te abraza.</span></h1>
-      <p>Chicharrón generoso, pan calientito y la sazón casera que empieza a conquistar Barranco.</p>
+      <p>Chicharrón generoso, pan calientito y toda la sazón casera que traemos con muchas ganas para ponerle sabor a Barranco.</p>
       <div class="hero-botones">
         <a class="btn btn-primario" href="#carta">Ver la carta ↘</a>
         <a class="btn btn-secundario" href="https://wa.me/51935129642?text=Hola%2C%20quiero%20hacer%20un%20pedido%20%F0%9F%98%8B" target="_blank" rel="noopener">Hacer pedido ↗</a>
@@ -362,7 +373,7 @@
   <div class="franja">
     <div class="item">🕐 <span><b>Lun — Dom</b><span>6:00 am – 12:00 pm / 2:00 pm – 10:00 pm</span></span></div>
     <div class="item">📍 <span><b>Jr. Pazos 237</b><span>Barranco, Lima</span></span></div>
-    <div class="item">✨ <span><b>Tradición desde el barrio</b></span></div>
+    <div class="item">✨ <span><b>Recién llegados, con toda la sazón</b></span></div>
   </div>
 </section>
 
@@ -388,127 +399,15 @@
     <button class="tab" data-tab="porciones">Porciones</button>
     <button class="tab" data-tab="jugos">Jugos</button>
     <button class="tab" data-tab="bebidas">Bebidas</button>
+    <button class="tab" data-tab="extra" id="tabExtra" style="display:none;">Extra</button>
   </div>
 
-  <div class="panel activo" id="favoritos">
-    <div class="producto" data-name="Pan con chicharrón" data-price="8">
-      <div>
-        <span class="tag">El de siempre</span>
-        <h3>Pan con chicharrón</h3>
-        <p>Chicharrón tronado, prensado en pan calientito.</p>
-      </div>
-      <div class="precio">
-        <span class="monto">S/ 8</span>
-        <div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div>
-      </div>
-    </div>
-    <div class="producto" data-name="1 kilo de chicharrón" data-price="70">
-      <div>
-        <span class="tag">Para compartir</span>
-        <h3>1 kilo de chicharrón</h3>
-        <p>Prensado al momento, ideal para llevar a casa.</p>
-      </div>
-      <div class="precio">
-        <span class="monto">S/ 70</span>
-        <div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div>
-      </div>
-    </div>
-    <div class="producto" data-name="Jugo Especial" data-price="10">
-      <div>
-        <span class="tag">Jugo especial</span>
-        <h3>Jugo Especial</h3>
-        <p>Nuestra mezcla de frutas de la casa, bien fría.</p>
-      </div>
-      <div class="precio">
-        <span class="monto">S/ 10</span>
-        <div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="panel" id="panes">
-    <p class="subtitulo">Panes</p>
-    <div class="lista">
-      <div class="fila" data-name="Pan con chicharrón" data-price="8"><span class="nombre">Pan con chicharrón</span><i></i><b>S/ 8</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Pan con chorizo" data-price="3"><span class="nombre">Pan con chorizo</span><i></i><b>S/ 3</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Pan con relleno" data-price="4"><span class="nombre">Pan con relleno</span><i></i><b>S/ 4</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Pan con queso fresco" data-price="3"><span class="nombre">Pan con queso fresco (suizo o mantecoso)</span><i></i><b>S/ 3</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Pan con hot dog" data-price="3.50"><span class="nombre">Pan con hot dog</span><i></i><b>S/ 3.50</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Pan con huevo" data-price="2.50"><span class="nombre">Pan con huevo</span><i></i><b>S/ 2.50</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila"><span class="nombre">Pan con palta</span><i></i><b>Consultar</b></div>
-    </div>
-  </div>
-
-  <div class="panel" id="porciones">
-    <p class="subtitulo">Porciones y adicionales</p>
-    <div class="lista">
-      <div class="fila" data-name="Porción de camote" data-price="5"><span class="nombre">Porción de camote</span><i></i><b>S/ 5</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Porción de costillas" data-price="33"><span class="nombre">Porción de costillas</span><i></i><b>S/ 33</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Porción de chicharrón" data-price="25"><span class="nombre">Porción de chicharrón</span><i></i><b>S/ 25</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="¼ de chicharrón" data-price="17"><span class="nombre">¼ de chicharrón</span><i></i><b>S/ 17</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="½ de chicharrón" data-price="35"><span class="nombre">½ de chicharrón</span><i></i><b>S/ 35</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="¾ de chicharrón" data-price="50"><span class="nombre">¾ de chicharrón</span><i></i><b>S/ 50</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="1 kilo de chicharrón" data-price="70"><span class="nombre">1 kilo de chicharrón</span><i></i><b>S/ 70</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-    </div>
-  </div>
-
-  <div class="panel" id="jugos">
-    <p class="subtitulo">Jugos de fruta</p>
-    <div class="lista">
-      <div class="fila" data-name="Jugo de papaya" data-price="8"><span class="nombre">Papaya</span><i></i><b>S/ 8</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Jugo de mango" data-price="8"><span class="nombre">Mango</span><i></i><b>S/ 8</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Jugo de piña" data-price="8"><span class="nombre">Piña</span><i></i><b>S/ 8</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Jugo de fresa" data-price="8"><span class="nombre">Fresa</span><i></i><b>S/ 8</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Jugo surtido" data-price="9"><span class="nombre">Surtido</span><i></i><b>S/ 9</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Jugo Especial" data-price="10"><span class="nombre">Especial</span><i></i><b>S/ 10</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-    </div>
-    <p class="subtitulo">Con leche</p>
-    <div class="lista">
-      <div class="fila" data-name="Jugo de papaya con leche" data-price="9.50"><span class="nombre">Papaya con leche</span><i></i><b>S/ 9.50</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Jugo de fresa con leche" data-price="9.50"><span class="nombre">Fresa con leche</span><i></i><b>S/ 9.50</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Jugo de plátano con leche" data-price="9.50"><span class="nombre">Plátano con leche</span><i></i><b>S/ 9.50</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Jugo de lúcuma con leche" data-price="9.50"><span class="nombre">Lúcuma con leche</span><i></i><b>S/ 9.50</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-    </div>
-  </div>
-
-  <div class="panel" id="bebidas">
-    <p class="subtitulo">Bebidas calientes</p>
-    <div class="lista">
-      <div class="fila" data-name="Café" data-price="5"><span class="nombre">Café</span><i></i><b>S/ 5</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Café c/leche" data-price="5.50"><span class="nombre">Café c/leche</span><i></i><b>S/ 5.50</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Leche con Milo" data-price="5"><span class="nombre">Leche con Milo</span><i></i><b>S/ 5</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Chocolate" data-price="5"><span class="nombre">Chocolate</span><i></i><b>S/ 5</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Té" data-price="3"><span class="nombre">Té</span><i></i><b>S/ 3</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Anís" data-price="3"><span class="nombre">Anís</span><i></i><b>S/ 3</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Manzanilla" data-price="3"><span class="nombre">Manzanilla</span><i></i><b>S/ 3</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-    </div>
-    <p class="subtitulo">Bebidas tradicionales</p>
-    <div class="lista">
-      <div class="fila" data-name="Emoliente" data-price="3"><span class="nombre">Emoliente</span><i></i><b>S/ 3</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Quinua" data-price="3"><span class="nombre">Quinua</span><i></i><b>S/ 3</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Maca" data-price="3"><span class="nombre">Maca</span><i></i><b>S/ 3</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Ponche de habas" data-price="3"><span class="nombre">Ponche de habas</span><i></i><b>S/ 3</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Avena" data-price="3"><span class="nombre">Avena</span><i></i><b>S/ 3</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Bebida tradicional Especial" data-price="5"><span class="nombre">Especial</span><i></i><b>S/ 5</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-    </div>
-    <p class="subtitulo">Tradicionales con leche</p>
-    <div class="lista">
-      <div class="fila" data-name="Quinua con leche" data-price="4"><span class="nombre">Quinua con leche</span><i></i><b>S/ 4</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Maca con leche" data-price="4"><span class="nombre">Maca con leche</span><i></i><b>S/ 4</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Ponche de habas con leche" data-price="4"><span class="nombre">Ponche de habas con leche</span><i></i><b>S/ 4</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Avena con leche" data-price="4"><span class="nombre">Avena con leche</span><i></i><b>S/ 4</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-    </div>
-    <p class="subtitulo">Bebidas frías</p>
-    <div class="lista">
-      <div class="fila" data-name="Jarra de chicha morada" data-price="10"><span class="nombre">Jarra de chicha morada</span><i></i><b>S/ 10</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Jarra de limonada" data-price="15"><span class="nombre">Jarra de limonada</span><i></i><b>S/ 15</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Jarra de maracuyá" data-price="12"><span class="nombre">Jarra de maracuyá</span><i></i><b>S/ 12</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="CocaCola / Inkacola 1/2 Lt" data-price="5"><span class="nombre">CocaCola / Inkacola 1/2 Lt</span><i></i><b>S/ 5</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="CocaCola / Inkacola 1 Lt" data-price="8"><span class="nombre">CocaCola / Inkacola 1 Lt</span><i></i><b>S/ 8</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="CocaCola / Inkacola 1.5 Lt" data-price="10"><span class="nombre">CocaCola / Inkacola 1.5 Lt</span><i></i><b>S/ 10</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-      <div class="fila" data-name="Agua mineral" data-price="3"><span class="nombre">Agua mineral</span><i></i><b>S/ 3</b><div class="stepper"><button class="menos">−</button><span class="cant">0</span><button class="mas">+</button></div></div>
-    </div>
-  </div>
+  <div class="panel activo" id="favoritos"><p class="cargando-menu">Cargando carta…</p></div>
+  <div class="panel" id="panes"></div>
+  <div class="panel" id="porciones"></div>
+  <div class="panel" id="jugos"></div>
+  <div class="panel" id="bebidas"></div>
+  <div class="panel" id="extra"></div>
 
   <div class="carta-cta">
     <p style="font-size:12.5px;color:var(--cafe);">Usa los botones ➕ para armar tu pedido — pasa a "Tu pedido" para elegir tu mesa y pagar.</p>
@@ -590,6 +489,239 @@
   var NUMERO_WHATSAPP = "51935129642";
   var cart = {};
 
+  /* ==========================================================
+     CARTA DINÁMICA — se lee desde una Google Sheet publicada
+     ========================================================== */
+
+  // 1) Pega aquí la URL de tu hoja publicada en CSV (ver instrucciones que te di aparte).
+  var SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSDdHtI1mtMgO5p2zLyRAOIdYYkg8Kltex-HYausCQqyBjawrh3iW2sDB-__hwirfFf4tZ47HD8qYwd/pub?gid=0&single=true&output=csv";
+
+  // 2) Si la hoja no carga (sin URL, sin internet, etc.) se usa esta copia local
+  //    para que la carta NUNCA se quede vacía.
+  var MENU_FALLBACK = [
+    {categoria:"favoritos", subcategoria:"", nombre:"Pan con chicharrón", descripcion:"Chicharrón tronado, prensado en pan calientito.", tag:"El de siempre", precio:"8", disponible:"SI"},
+    {categoria:"favoritos", subcategoria:"", nombre:"1 kilo de chicharrón", descripcion:"Prensado al momento, ideal para llevar a casa.", tag:"Para compartir", precio:"70", disponible:"SI"},
+    {categoria:"favoritos", subcategoria:"", nombre:"Jugo Especial", descripcion:"Nuestra mezcla de frutas de la casa, bien fría.", tag:"Jugo especial", precio:"10", disponible:"SI"},
+
+    {categoria:"panes", subcategoria:"Panes", nombre:"Pan con chicharrón", precio:"8", disponible:"SI"},
+    {categoria:"panes", subcategoria:"Panes", nombre:"Pan con chorizo", precio:"3", disponible:"SI"},
+    {categoria:"panes", subcategoria:"Panes", nombre:"Pan con relleno", precio:"4", disponible:"SI"},
+    {categoria:"panes", subcategoria:"Panes", nombre:"Pan con queso fresco (suizo o mantecoso)", precio:"3", disponible:"SI"},
+    {categoria:"panes", subcategoria:"Panes", nombre:"Pan con hot dog", precio:"3.50", disponible:"SI"},
+    {categoria:"panes", subcategoria:"Panes", nombre:"Pan con huevo", precio:"2.50", disponible:"SI"},
+    {categoria:"panes", subcategoria:"Panes", nombre:"Pan con palta", precio:"", disponible:"SI"},
+
+    {categoria:"porciones", subcategoria:"Porciones y adicionales", nombre:"Porción de camote", precio:"5", disponible:"SI"},
+    {categoria:"porciones", subcategoria:"Porciones y adicionales", nombre:"Porción de costillas", precio:"33", disponible:"SI"},
+    {categoria:"porciones", subcategoria:"Porciones y adicionales", nombre:"Porción de chicharrón", precio:"25", disponible:"SI"},
+    {categoria:"porciones", subcategoria:"Porciones y adicionales", nombre:"¼ de chicharrón", precio:"17", disponible:"SI"},
+    {categoria:"porciones", subcategoria:"Porciones y adicionales", nombre:"½ de chicharrón", precio:"35", disponible:"SI"},
+    {categoria:"porciones", subcategoria:"Porciones y adicionales", nombre:"¾ de chicharrón", precio:"50", disponible:"SI"},
+    {categoria:"porciones", subcategoria:"Porciones y adicionales", nombre:"1 kilo de chicharrón", precio:"70", disponible:"SI"},
+
+    {categoria:"jugos", subcategoria:"Jugos de fruta", nombre:"Papaya", precio:"8", disponible:"SI"},
+    {categoria:"jugos", subcategoria:"Jugos de fruta", nombre:"Mango", precio:"8", disponible:"SI"},
+    {categoria:"jugos", subcategoria:"Jugos de fruta", nombre:"Piña", precio:"8", disponible:"SI"},
+    {categoria:"jugos", subcategoria:"Jugos de fruta", nombre:"Fresa", precio:"8", disponible:"SI"},
+    {categoria:"jugos", subcategoria:"Jugos de fruta", nombre:"Surtido", precio:"9", disponible:"SI"},
+    {categoria:"jugos", subcategoria:"Jugos de fruta", nombre:"Jugo Especial", precio:"10", disponible:"SI"},
+    {categoria:"jugos", subcategoria:"Con leche", nombre:"Papaya con leche", precio:"9.50", disponible:"SI"},
+    {categoria:"jugos", subcategoria:"Con leche", nombre:"Fresa con leche", precio:"9.50", disponible:"SI"},
+    {categoria:"jugos", subcategoria:"Con leche", nombre:"Plátano con leche", precio:"9.50", disponible:"SI"},
+    {categoria:"jugos", subcategoria:"Con leche", nombre:"Lúcuma con leche", precio:"9.50", disponible:"SI"},
+
+    {categoria:"bebidas", subcategoria:"Bebidas calientes", nombre:"Café", precio:"5", disponible:"SI"},
+    {categoria:"bebidas", subcategoria:"Bebidas calientes", nombre:"Café c/leche", precio:"5.50", disponible:"SI"},
+    {categoria:"bebidas", subcategoria:"Bebidas calientes", nombre:"Leche con Milo", precio:"5", disponible:"SI"},
+    {categoria:"bebidas", subcategoria:"Bebidas calientes", nombre:"Chocolate", precio:"5", disponible:"SI"},
+    {categoria:"bebidas", subcategoria:"Bebidas calientes", nombre:"Té", precio:"3", disponible:"SI"},
+    {categoria:"bebidas", subcategoria:"Bebidas calientes", nombre:"Anís", precio:"3", disponible:"SI"},
+    {categoria:"bebidas", subcategoria:"Bebidas calientes", nombre:"Manzanilla", precio:"3", disponible:"SI"},
+    {categoria:"bebidas", subcategoria:"Bebidas tradicionales", nombre:"Emoliente", precio:"3", disponible:"SI"},
+    {categoria:"bebidas", subcategoria:"Bebidas tradicionales", nombre:"Quinua", precio:"3", disponible:"SI"},
+    {categoria:"bebidas", subcategoria:"Bebidas tradicionales", nombre:"Maca", precio:"3", disponible:"SI"},
+    {categoria:"bebidas", subcategoria:"Bebidas tradicionales", nombre:"Ponche de habas", precio:"3", disponible:"SI"},
+    {categoria:"bebidas", subcategoria:"Bebidas tradicionales", nombre:"Avena", precio:"3", disponible:"SI"},
+    {categoria:"bebidas", subcategoria:"Bebidas tradicionales", nombre:"Bebida tradicional Especial", precio:"5", disponible:"SI"},
+    {categoria:"bebidas", subcategoria:"Tradicionales con leche", nombre:"Quinua con leche", precio:"4", disponible:"SI"},
+    {categoria:"bebidas", subcategoria:"Tradicionales con leche", nombre:"Maca con leche", precio:"4", disponible:"SI"},
+    {categoria:"bebidas", subcategoria:"Tradicionales con leche", nombre:"Ponche de habas con leche", precio:"4", disponible:"SI"},
+    {categoria:"bebidas", subcategoria:"Tradicionales con leche", nombre:"Avena con leche", precio:"4", disponible:"SI"},
+    {categoria:"bebidas", subcategoria:"Bebidas frías", nombre:"Jarra de chicha morada", precio:"10", disponible:"SI"},
+    {categoria:"bebidas", subcategoria:"Bebidas frías", nombre:"Jarra de limonada", precio:"15", disponible:"SI"},
+    {categoria:"bebidas", subcategoria:"Bebidas frías", nombre:"Jarra de maracuyá", precio:"12", disponible:"SI"},
+    {categoria:"bebidas", subcategoria:"Bebidas frías", nombre:"CocaCola / Inkacola 1/2 Lt", precio:"5", disponible:"SI"},
+    {categoria:"bebidas", subcategoria:"Bebidas frías", nombre:"CocaCola / Inkacola 1 Lt", precio:"8", disponible:"SI"},
+    {categoria:"bebidas", subcategoria:"Bebidas frías", nombre:"CocaCola / Inkacola 1.5 Lt", precio:"10", disponible:"SI"},
+    {categoria:"bebidas", subcategoria:"Bebidas frías", nombre:"Agua mineral", precio:"3", disponible:"SI"}
+  ];
+
+  function parseCSV(texto){
+    var filas = [];
+    var lineas = texto.split(/\r\n|\n/).filter(function(l){ return l.trim().length > 0; });
+    for (var i = 0; i < lineas.length; i++){
+      var linea = lineas[i];
+      var celdas = [];
+      var actual = '';
+      var entreComillas = false;
+      for (var j = 0; j < linea.length; j++){
+        var c = linea[j];
+        if (c === '"'){
+          if (entreComillas && linea[j+1] === '"'){ actual += '"'; j++; }
+          else { entreComillas = !entreComillas; }
+        } else if (c === ',' && !entreComillas){
+          celdas.push(actual); actual = '';
+        } else {
+          actual += c;
+        }
+      }
+      celdas.push(actual);
+      filas.push(celdas);
+    }
+    return filas;
+  }
+
+  function csvAItems(texto){
+    var filas = parseCSV(texto);
+    if (filas.length < 2) return [];
+    var encabezados = filas[0].map(function(h){ return h.trim().toLowerCase(); });
+    var items = [];
+    for (var i = 1; i < filas.length; i++){
+      var fila = filas[i];
+      var obj = {};
+      encabezados.forEach(function(h, idx){ obj[h] = (fila[idx] || '').trim(); });
+      if (obj.nombre) items.push(obj);
+    }
+    return items;
+  }
+
+  function estaAgotado(item){
+    var v = (item.disponible || '').toString().trim().toLowerCase();
+    return v === 'no' || v === '0' || v === 'false' || v === 'agotado';
+  }
+
+  function formatearPrecio(n){
+    return (Math.round(n * 100) / 100).toString().replace(/\.00$/, '');
+  }
+
+  function crearBadgeStock(agotado){
+    var span = document.createElement('span');
+    span.className = 'stock ' + (agotado ? 'stock-no' : 'stock-si');
+    span.textContent = agotado ? 'Agotado' : 'Disponible';
+    return span;
+  }
+
+  function crearStepper(){
+    var div = document.createElement('div'); div.className = 'stepper';
+    var menos = document.createElement('button'); menos.className = 'menos'; menos.textContent = '−';
+    var cant = document.createElement('span'); cant.className = 'cant'; cant.textContent = '0';
+    var mas = document.createElement('button'); mas.className = 'mas'; mas.textContent = '+';
+    div.appendChild(menos); div.appendChild(cant); div.appendChild(mas);
+    return div;
+  }
+
+  function crearTarjetaProducto(item){
+    var agotado = estaAgotado(item);
+    var precioNum = parseFloat(item.precio);
+    var conPrecio = !isNaN(precioNum);
+    var div = document.createElement('div');
+    div.className = 'producto' + (agotado ? ' agotado' : '');
+    if (conPrecio && !agotado){ div.dataset.name = item.nombre; div.dataset.price = precioNum; }
+
+    var izq = document.createElement('div');
+    if (item.tag){ var tag = document.createElement('span'); tag.className = 'tag'; tag.textContent = item.tag; izq.appendChild(tag); }
+    var h3 = document.createElement('h3'); h3.textContent = item.nombre; izq.appendChild(h3);
+    if (item.descripcion){ var p = document.createElement('p'); p.textContent = item.descripcion; izq.appendChild(p); }
+    div.appendChild(izq);
+
+    var der = document.createElement('div'); der.className = 'precio';
+    der.appendChild(crearBadgeStock(agotado));
+    var monto = document.createElement('span'); monto.className = 'monto';
+    monto.textContent = conPrecio ? ('S/ ' + formatearPrecio(precioNum)) : 'Consultar';
+    der.appendChild(monto);
+    if (conPrecio && !agotado){ der.appendChild(crearStepper()); }
+    div.appendChild(der);
+    return div;
+  }
+
+  function crearFilaProducto(item){
+    var agotado = estaAgotado(item);
+    var precioNum = parseFloat(item.precio);
+    var conPrecio = !isNaN(precioNum);
+    var fila = document.createElement('div');
+    fila.className = 'fila' + (agotado ? ' agotado' : '');
+    if (conPrecio && !agotado){ fila.dataset.name = item.nombre; fila.dataset.price = precioNum; }
+
+    var nombre = document.createElement('span'); nombre.className = 'nombre'; nombre.textContent = item.nombre;
+    fila.appendChild(nombre);
+    fila.appendChild(crearBadgeStock(agotado));
+    fila.appendChild(document.createElement('i'));
+    var b = document.createElement('b');
+    b.textContent = conPrecio ? ('S/ ' + formatearPrecio(precioNum)) : 'Consultar';
+    fila.appendChild(b);
+    if (conPrecio && !agotado){ fila.appendChild(crearStepper()); }
+    return fila;
+  }
+
+  function renderMenu(items){
+    var categorias = ['favoritos', 'panes', 'porciones', 'jugos', 'bebidas', 'extra'];
+    categorias.forEach(function(catId){
+      var panel = document.getElementById(catId);
+      if (!panel) return;
+      panel.innerHTML = '';
+      var propios = items.filter(function(it){ return (it.categoria || '').toLowerCase() === catId; });
+
+      if (catId === 'extra'){
+        var tabExtra = document.getElementById('tabExtra');
+        if (tabExtra) tabExtra.style.display = propios.length > 0 ? '' : 'none';
+      }
+
+      if (propios.length === 0) return;
+
+      if (catId === 'favoritos'){
+        propios.forEach(function(it){ panel.appendChild(crearTarjetaProducto(it)); });
+      } else {
+        var grupos = [];
+        var indice = {};
+        propios.forEach(function(it){
+          var sub = it.subcategoria || '';
+          if (!(sub in indice)){ indice[sub] = grupos.length; grupos.push({ nombre: sub, items: [] }); }
+          grupos[indice[sub]].items.push(it);
+        });
+        grupos.forEach(function(g){
+          if (g.nombre){
+            var titulo = document.createElement('p');
+            titulo.className = 'subtitulo';
+            titulo.textContent = g.nombre;
+            panel.appendChild(titulo);
+          }
+          var lista = document.createElement('div'); lista.className = 'lista';
+          g.items.forEach(function(it){ lista.appendChild(crearFilaProducto(it)); });
+          panel.appendChild(lista);
+        });
+      }
+    });
+  }
+
+  function cargarMenu(){
+    if (!SHEET_CSV_URL || SHEET_CSV_URL.indexOf('PEGA_AQUI') !== -1){
+      renderMenu(MENU_FALLBACK);
+      return;
+    }
+    fetch(SHEET_CSV_URL, { cache: 'no-store' })
+      .then(function(r){ if (!r.ok) throw new Error('respuesta no OK'); return r.text(); })
+      .then(function(texto){
+        var items = csvAItems(texto);
+        renderMenu(items.length > 0 ? items : MENU_FALLBACK);
+      })
+      .catch(function(err){
+        console.warn('No se pudo cargar el menú desde Google Sheets, se usa la copia local.', err);
+        renderMenu(MENU_FALLBACK);
+      });
+  }
+
+  cargarMenu();
+
   function renderResumen(){
     var cont = document.getElementById('resumenPedido');
     var vacio = document.getElementById('resumenVacio');
@@ -627,29 +759,22 @@
     renderResumen();
   }
 
-  document.querySelectorAll('[data-name]').forEach(function(item){
+  // Delegación de eventos: funciona con productos generados dinámicamente
+  // desde la Google Sheet (no hace falta re-enlazar botones al recargar el menú).
+  document.addEventListener('click', function(e){
+    var masBtn = e.target.closest('.mas');
+    var menosBtn = e.target.closest('.menos');
+    if (!masBtn && !menosBtn) return;
+    var item = e.target.closest('[data-name]');
+    if (!item) return;
     var nombre = item.dataset.name;
     var precio = parseFloat(item.dataset.price);
     var qtySpan = item.querySelector('.cant');
-    var qty = 0;
-    var masBtn = item.querySelector('.mas');
-    var menosBtn = item.querySelector('.menos');
-    if (masBtn){
-      masBtn.addEventListener('click', function(){
-        qty++;
-        qtySpan.textContent = qty;
-        cart[nombre] = { precio: precio, qty: qty };
-        actualizarBarra();
-      });
-    }
-    if (menosBtn){
-      menosBtn.addEventListener('click', function(){
-        qty = Math.max(0, qty - 1);
-        qtySpan.textContent = qty;
-        if (qty === 0){ delete cart[nombre]; } else { cart[nombre] = { precio: precio, qty: qty }; }
-        actualizarBarra();
-      });
-    }
+    var qty = parseInt(qtySpan.textContent, 10) || 0;
+    if (masBtn){ qty++; } else { qty = Math.max(0, qty - 1); }
+    qtySpan.textContent = qty;
+    if (qty === 0){ delete cart[nombre]; } else { cart[nombre] = { precio: precio, qty: qty }; }
+    actualizarBarra();
   });
 
   document.getElementById('btnEnviarPedido').addEventListener('click', function(){

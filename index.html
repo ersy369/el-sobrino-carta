@@ -178,6 +178,14 @@
     gap:14px;
     box-shadow:0 2px 10px rgba(46,27,18,0.06);
   }
+  .producto .foto{
+    width:72px;height:72px;border-radius:14px;object-fit:cover;
+    flex:0 0 auto;
+  }
+  .fila .foto{
+    width:40px;height:40px;border-radius:10px;object-fit:cover;
+    flex:0 0 auto;
+  }
   .producto .tag{
     display:inline-block;
     font-size:10px;font-weight:800;letter-spacing:0.5px;
@@ -472,6 +480,7 @@
       <div id="resumenPedido">
         <p id="resumenVacio">Todavía no agregaste productos. Sube a la carta y dale ➕ a lo que quieras pedir.</p>
       </div>
+      <p class="aviso">✅ Revisa bien cada plato y cantidad antes de continuar — apenas confirmes tu pedido, se envía directo a cocina.</p>
     </div>
   </div>
 
@@ -504,7 +513,7 @@
   <div class="botones-pedido">
     <button class="btn btn-primario" id="btnMostrarCaja">Realizar pedido</button>
   </div>
-  <p class="aviso">📌 Al tocar "Realizar pedido" se arma un ticket en pantalla con tu mesa, tu pedido y el total — solo le enseñas esa pantalla a quien te atiende en caja para confirmar y pagar.</p>
+  <p class="aviso">📌 Al tocar "Realizar pedido" se arma un ticket en pantalla con tu mesa, tu pedido y el total, y se envía directo a la pantalla del negocio — igual puedes enseñar tu ticket en caja para confirmar y pagar.</p>
 </section>
 
 <!-- ============ MODAL: TICKET PARA MOSTRAR EN CAJA ============ -->
@@ -567,23 +576,23 @@
     {categoria:"porciones", subcategoria:"Porciones y adicionales", nombre:"Porción de camote", precio:"5", disponible:"SI"},
     {categoria:"porciones", subcategoria:"Porciones y adicionales", nombre:"Porción de costillas", precio:"33", disponible:"SI"},
     {categoria:"porciones", subcategoria:"Porciones y adicionales", nombre:"Porción de chicharrón", precio:"25", disponible:"SI"},
-    {categoria:"porciones", subcategoria:"Porciones y adicionales", nombre:"¼ de chicharrón", precio:"17", disponible:"SI"},
+    {categoria:"porciones", subcategoria:"Porciones y adicionales", nombre:"¼ de chicharrón", precio:"17", disponible:"SI", imagen:"porcion-chicharron-300g.webp"},
     {categoria:"porciones", subcategoria:"Porciones y adicionales", nombre:"½ de chicharrón", precio:"35", disponible:"SI"},
     {categoria:"porciones", subcategoria:"Porciones y adicionales", nombre:"¾ de chicharrón", precio:"50", disponible:"SI"},
     {categoria:"porciones", subcategoria:"Porciones y adicionales", nombre:"1 kilo de chicharrón", precio:"70", disponible:"SI"},
 
-    {categoria:"jugos", subcategoria:"Jugos de fruta", nombre:"Papaya", precio:"8", disponible:"SI"},
+    {categoria:"jugos", subcategoria:"Jugos de fruta", nombre:"Papaya", precio:"8", disponible:"SI", imagen:"jugo-de-papaya.webp"},
     {categoria:"jugos", subcategoria:"Jugos de fruta", nombre:"Mango", precio:"8", disponible:"SI"},
     {categoria:"jugos", subcategoria:"Jugos de fruta", nombre:"Piña", precio:"8", disponible:"SI"},
     {categoria:"jugos", subcategoria:"Jugos de fruta", nombre:"Fresa", precio:"8", disponible:"SI"},
     {categoria:"jugos", subcategoria:"Jugos de fruta", nombre:"Surtido", precio:"9", disponible:"SI"},
     {categoria:"jugos", subcategoria:"Jugos de fruta", nombre:"Jugo Especial", precio:"10", disponible:"SI"},
     {categoria:"jugos", subcategoria:"Con leche", nombre:"Papaya con leche", precio:"9.50", disponible:"SI"},
-    {categoria:"jugos", subcategoria:"Con leche", nombre:"Fresa con leche", precio:"9.50", disponible:"SI"},
+    {categoria:"jugos", subcategoria:"Con leche", nombre:"Fresa con leche", precio:"9.50", disponible:"SI", imagen:"jugo-de-fresa-con-leche.webp"},
     {categoria:"jugos", subcategoria:"Con leche", nombre:"Plátano con leche", precio:"9.50", disponible:"SI"},
     {categoria:"jugos", subcategoria:"Con leche", nombre:"Lúcuma con leche", precio:"9.50", disponible:"SI"},
 
-    {categoria:"bebidas", subcategoria:"Bebidas calientes", nombre:"Café", precio:"5", disponible:"SI"},
+    {categoria:"bebidas", subcategoria:"Bebidas calientes", nombre:"Café", precio:"5", disponible:"SI", imagen:"taza-de-cafe.webp"},
     {categoria:"bebidas", subcategoria:"Bebidas calientes", nombre:"Café c/leche", precio:"5.50", disponible:"SI"},
     {categoria:"bebidas", subcategoria:"Bebidas calientes", nombre:"Leche con Milo", precio:"5", disponible:"SI"},
     {categoria:"bebidas", subcategoria:"Bebidas calientes", nombre:"Chocolate", precio:"5", disponible:"SI"},
@@ -681,6 +690,13 @@
     div.className = 'producto' + (agotado ? ' agotado' : '');
     if (conPrecio && !agotado){ div.dataset.name = item.nombre; div.dataset.price = precioNum; }
 
+    if (item.imagen){
+      var foto = document.createElement('img');
+      foto.className = 'foto'; foto.src = item.imagen; foto.alt = item.nombre;
+      foto.loading = 'lazy'; foto.decoding = 'async';
+      div.appendChild(foto);
+    }
+
     var izq = document.createElement('div');
     if (item.tag){ var tag = document.createElement('span'); tag.className = 'tag'; tag.textContent = item.tag; izq.appendChild(tag); }
     var h3 = document.createElement('h3'); h3.textContent = item.nombre; izq.appendChild(h3);
@@ -704,6 +720,13 @@
     var fila = document.createElement('div');
     fila.className = 'fila' + (agotado ? ' agotado' : '');
     if (conPrecio && !agotado){ fila.dataset.name = item.nombre; fila.dataset.price = precioNum; }
+
+    if (item.imagen){
+      var fotoFila = document.createElement('img');
+      fotoFila.className = 'foto'; fotoFila.src = item.imagen; fotoFila.alt = item.nombre;
+      fotoFila.loading = 'lazy'; fotoFila.decoding = 'async';
+      fila.appendChild(fotoFila);
+    }
 
     var nombre = document.createElement('span'); nombre.className = 'nombre'; nombre.textContent = item.nombre;
     fila.appendChild(nombre);
@@ -852,15 +875,22 @@
     }
     var total = 0;
     var html = '';
+    var itemsParaPanel = [];
     keys.forEach(function(k){
       var sub = cart[k].qty * cart[k].precio;
       total += sub;
       html += '<div class="ticket-linea"><span>' + cart[k].qty + ' × ' + k + '</span><b>S/ ' + sub.toFixed(2).replace(/\.00$/,'') + '</b></div>';
+      itemsParaPanel.push({ nombre: k, cantidad: cart[k].qty, precio: cart[k].precio });
     });
     document.getElementById('ticketLineas').innerHTML = html;
     document.getElementById('ticketTotal').textContent = 'S/ ' + total.toFixed(2).replace(/\.00$/,'');
     document.getElementById('ticketMesa').textContent = mesa;
     document.getElementById('modalTicket').classList.add('visible');
+
+    // Envía el pedido al panel en vivo del dueño (no bloquea el ticket si falla)
+    if (window.guardarPedidoEnPanel){
+      window.guardarPedidoEnPanel(mesa, itemsParaPanel, total);
+    }
   }
 
   document.getElementById('btnMostrarCaja').addEventListener('click', mostrarTicket);
@@ -879,6 +909,47 @@
       document.getElementById(tab.dataset.tab).classList.add('activo');
     });
   });
+</script>
+
+<!-- ============ PANEL EN VIVO (Firebase) ============ -->
+<!-- Esto envía cada pedido confirmado a una base de datos gratuita (Firebase),
+     para que aparezca solo en el panel.html que ve el dueño en su celular.
+     Si el proyecto de Firebase aún no está configurado, o no hay internet,
+     el ticket en pantalla sigue funcionando igual — esto es un extra, no reemplaza nada. -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  // 1) PEGA AQUÍ los datos de tu proyecto de Firebase.
+  //    Los encuentras en: Firebase Console → ⚙️ Configuración del proyecto → tus apps → Config
+  var firebaseConfig = {
+    apiKey: "AIzaSyCqb3UUALYSbHyVqWPIYCtBy31LvvtVSX0",
+    authDomain: "el-sobrino-pedidos.firebaseapp.com",
+    projectId: "el-sobrino-pedidos",
+    storageBucket: "el-sobrino-pedidos.firebasestorage.app",
+    messagingSenderId: "1050112741711",
+    appId: "1:1050112741711:web:4eb230456bac5f072ff53a"
+  };
+
+  try {
+    var app = initializeApp(firebaseConfig);
+    var db = getFirestore(app);
+
+    window.guardarPedidoEnPanel = function(mesa, items, total){
+      return addDoc(collection(db, "pedidos"), {
+        negocio: "el-sobrino",
+        mesa: mesa,
+        items: items,
+        total: total,
+        estado: "pendiente",
+        creado: serverTimestamp()
+      }).catch(function(err){
+        console.warn("No se pudo guardar el pedido en el panel (el ticket en pantalla sigue funcionando igual):", err);
+      });
+    };
+  } catch (err) {
+    console.warn("Firebase todavía no está configurado — el panel en vivo no recibirá pedidos hasta que se pegue la configuración real.", err);
+  }
 </script>
 
 </body>
